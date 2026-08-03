@@ -3,7 +3,7 @@ import os
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
-from src.workflow import build_workflow
+from src.workflow import build_workflow, init_retriever
 from src.llm import LLMService
 import contextlib
 
@@ -12,6 +12,7 @@ async def lifespan(app: FastAPI):
     print("Loading models and initializing graph...")
     app.state.workflow = build_workflow()
     _ = LLMService.get_instance()
+    init_retriever()
     print("Agent is ready to accept queries.")
     yield
     print("Shutting down...")

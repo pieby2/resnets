@@ -9,11 +9,16 @@ import os
 
 retriever = None
 
-def retrieve_node(state: AgentState) -> dict:
+def init_retriever():
     global retriever
     if retriever is None:
         base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         retriever = DocumentRetriever(base_path)
+
+def retrieve_node(state: AgentState) -> dict:
+    global retriever
+    if retriever is None:
+        init_retriever()
     
     question = state.get("question", "")
     docs = retriever.retrieve(question)
