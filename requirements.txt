@@ -1,0 +1,11 @@
+langchain
+langchain-community
+langgraph
+transformers
+sentence-transformers
+torch
+faiss-cpu
+pydantic
+pytest
+rich
+numpy<2
